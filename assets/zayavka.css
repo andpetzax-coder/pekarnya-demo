@@ -4,7 +4,7 @@
 .v-btn:not(.v-btn--ghost) {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(110deg, var(--v-accent) 38%, #ffd98c 50%, var(--v-accent) 62%);
+  background: linear-gradient(110deg, var(--v-accent) 34%, #ffe1a1 50%, var(--v-accent) 66%);
   background-size: 230% 100%;
   background-position: 115% 0;
   transition: background-position .55s var(--v-ease-out, ease-out),
