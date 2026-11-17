@@ -38,6 +38,16 @@
 
 /* ---- Модальное окно заявки ---- */
 .zayavka {
+  /* токены движка: внутри окна нет .v-page, объявляем нужное, чтобы .v-btn собрался */
+  --v-accent: #f2a93b;
+  --v-accent-ink: #14110b;
+  --v-ink: #f2efe9;
+  --v-ink-soft: #a09b93;
+  --v-shadow-color: 0 0 0;
+  --v-e1: 0 1px 2px rgb(var(--v-shadow-color) / .28), 0 6px 18px rgb(var(--v-shadow-color) / .22);
+  --v-e2: 0 2px 6px rgb(var(--v-shadow-color) / .3), 0 18px 48px rgb(var(--v-shadow-color) / .32);
+  --v-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --v-t-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.95rem);
   position: fixed;
   inset: 0;
   z-index: 1000;
