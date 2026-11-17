@@ -23,6 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23e4b45f%27/%3E%3Cpath d=%27M16 26c0-8 3-13 10-16-1 8-4 13-10 16z%27 fill=%27%231a1420%27/%3E%3Cpath d=%27M16 26c0-6-2-10-7-12 1 6 3 10 7 12z%27 fill=%27%231a1420%27 opacity=%27.6%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="vibe.css">
+<link rel="stylesheet" href="assets/zayavka.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Bakery","name":"У Петра","description":"Торты и хлеб на заказ: фото готового торта перед выдачей, состав и цена финальные при заказе, печём ночью на живой закваске.","url":"https://andpetzax-coder.github.io/pekarnya-demo","image":"https://andpetzax-coder.github.io/pekarnya-demo/assets/og.jpg","telephone":"+79000000000","openingHours":"Mo-Su 09:00-21:00","areaServed":"Казань","address":{"@type":"PostalAddress","streetAddress":"ул. Пушкина, 8","addressLocality":"Казань","addressCountry":"RU"},"priceRange":"уточнить"}
 </script>
@@ -316,7 +317,7 @@
     <a class="bar__mark" href="#top"><i aria-hidden="true"></i>У Петра</a>
     <nav class="bar__right" aria-label="Быстрые ссылки">
       <a class="bar__tel" href="tel:+79000000000">+7 900 000-00-00</a>
-      <a class="v-btn" href="https://t.me/upetra_torty" rel="noopener">Оставить заявку</a>
+      <a class="v-btn" href="#zayavka">Оставить заявку</a>
     </nav>
   </header>
 
@@ -355,7 +356,7 @@
           <h1 class="v-display v-display--xl" data-v-kinetic="lines">Торты на заказ в Казани как на фото</h1>
           <p class="v-lede">Фото готового торта присылаем за день до выдачи: получаете то, что на фото. Состав и цена финальные при подтверждении заказа, хлеб на живой закваске – к утру.</p>
           <div class="hero__cta">
-            <a class="v-btn" href="https://t.me/upetra_torty" rel="noopener">Оставить заявку</a>
+            <a class="v-btn" href="#zayavka">Оставить заявку</a>
             <a class="hero__tel" href="tel:+79000000000">или позвоните <b>+7 900 000-00-00</b></a>
           </div>
         </div>
@@ -422,7 +423,7 @@
           </div>
 
           <div class="sb__after" data-v-cue="0.78 1 0.06 0">
-            <a class="v-btn" href="https://t.me/upetra_torty" rel="noopener">Оставить заявку</a>
+            <a class="v-btn" href="#zayavka">Оставить заявку</a>
             <span class="sb__hint">Не знаете, какой торт – опишите человека и повод, предложим варианты с фото</span>
           </div>
         </div>
@@ -535,7 +536,7 @@
             <h2 class="v-display v-display--lg">Назовите повод и дату</h2>
             <p class="v-lede">Ответим составом, ценой и датой готовности. Фото готового торта придёт в тот же чат за день до выдачи.</p>
             <div class="close__cta">
-              <a class="v-btn" href="https://t.me/upetra_torty" rel="noopener" data-v-magnet="0.22" data-v-rise="0">Оставить заявку</a>
+              <a class="v-btn" href="#zayavka" data-v-magnet="0.22" data-v-rise="0">Оставить заявку</a>
               <a class="close__tel" href="tel:+79000000000">+7 900 000-00-00</a>
             </div>
             <p class="close__hint">Не знаете, какой торт – опишите человека и повод, предложим два-три варианта с фото и ценой. Не любите писать – звоните.</p>
@@ -557,7 +558,41 @@
   </main>
 </div>
 
+<div class="zayavka" id="zayavka" hidden>
+  <div class="zayavka__overlay" data-zayavka-close></div>
+  <div class="zayavka__card" role="dialog" aria-modal="true" aria-labelledby="zayavka-title">
+    <button class="zayavka__close" type="button" data-zayavka-close aria-label="Закрыть">&times;</button>
+    <p class="zayavka__label">Домашняя пекарня «У Петра»</p>
+    <h2 class="zayavka__title" id="zayavka-title">Оставить заявку</h2>
+    <p class="zayavka__sub">Опишите повод и дату - ответим составом, ценой и датой готовности. Фото готового торта пришлём в тот же чат за день до выдачи.</p>
+    <form class="zayavka__form" id="zayavka-form" novalidate>
+      <label>Ваше имя
+        <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться">
+      </label>
+      <label>Телефон
+        <input type="tel" name="phone" autocomplete="tel" placeholder="+7 ___ ___-__-__">
+      </label>
+      <label>Дата выдачи
+        <input type="date" name="date">
+      </label>
+      <label>Комментарий
+        <textarea name="comment" rows="3" placeholder="Повод, вес, начинка, надпись на торте"></textarea>
+      </label>
+      <p class="zayavka__error" id="zayavka-error" hidden>Заполните имя и телефон - по ним мы ответим на заявку.</p>
+      <button class="v-btn zayavka__submit" type="submit">Отправить заявку</button>
+      <p class="zayavka__note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+    </form>
+    <div class="zayavka__done" id="zayavka-done" hidden>
+      <h3>Заявка сформирована</h3>
+      <p id="zayavka-done-text"></p>
+      <a class="v-btn v-btn--ghost zayavka__tg" href="https://t.me/upetra_torty" target="_blank" rel="noopener">Продублировать в Telegram</a>
+      <button class="zayavka__again" type="button" data-zayavka-again>Новая заявка</button>
+    </div>
+  </div>
+</div>
+
 <script src="vibe.js"></script>
+<script src="assets/zayavka.js"></script>
 <script>
   // На телефоне пины короче: data-v-span из CSS не поменять, правим атрибут до монтирования.
   if (window.matchMedia('(max-width: 860px)').matches) {

@@ -1,0 +1,212 @@
+/* Заявка: перелив кнопок + модальное окно формы. Движок vibe.css не трогаем. */
+
+/* ---- Кнопки: перелив цвета и блик при наведении ---- */
+.v-btn:not(.v-btn--ghost) {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(110deg, var(--v-accent) 38%, #ffd98c 50%, var(--v-accent) 62%);
+  background-size: 230% 100%;
+  background-position: 115% 0;
+  transition: background-position .55s var(--v-ease-out, ease-out),
+              transform .16s var(--v-ease-out, ease-out),
+              box-shadow .16s var(--v-ease-out, ease-out);
+}
+.v-btn:not(.v-btn--ghost):hover {
+  background-position: -15% 0;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px color-mix(in oklab, var(--v-accent) 38%, transparent);
+}
+.v-btn:not(.v-btn--ghost)::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: -70%;
+  width: 45%;
+  transform: skewX(-22deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.v-btn:not(.v-btn--ghost):hover::before {
+  animation: v-btn-sheen .7s ease forwards;
+}
+@keyframes v-btn-sheen {
+  from { left: -70%; opacity: 1; }
+  to   { left: 140%; opacity: 1; }
+}
+
+/* ---- Модальное окно заявки ---- */
+.zayavka {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.zayavka[hidden] { display: none; }
+.zayavka__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 9, 6, .72);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.zayavka__card {
+  position: relative;
+  width: min(480px, 100%);
+  max-height: 92svh;
+  overflow-y: auto;
+  background: #211a13;
+  border: 1px solid var(--v-hair-strong, rgba(242, 239, 233, .26));
+  border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
+  padding: 36px 32px 28px;
+  color: var(--v-ink, #f2efe9);
+  opacity: 0;
+  transform: translateY(18px) scale(.97);
+  transition: opacity .25s ease, transform .25s var(--v-ease-out, ease-out);
+}
+.zayavka.is-open .zayavka__overlay { opacity: 1; }
+.zayavka.is-open .zayavka__card { opacity: 1; transform: none; }
+
+.zayavka__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--v-ink-soft, #a09b93);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, transform .3s ease;
+}
+.zayavka__close:hover {
+  background: rgba(242, 239, 233, .1);
+  color: var(--v-ink, #f2efe9);
+  transform: rotate(90deg);
+}
+
+.zayavka__label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--v-accent, #f2a93b);
+}
+.zayavka__title {
+  margin: 0 0 10px;
+  font-family: "Tenor Sans", serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.15;
+}
+.zayavka__sub {
+  margin: 0 0 22px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--v-ink-soft, #a09b93);
+}
+
+.zayavka__form label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.zayavka__form input,
+.zayavka__form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(242, 239, 233, .18);
+  border-radius: 12px;
+  background: rgba(242, 239, 233, .06);
+  color: var(--v-ink, #f2efe9);
+  font: inherit;
+  font-weight: 400;
+  font-size: 15px;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.zayavka__form textarea { resize: vertical; min-height: 74px; }
+.zayavka__form input::placeholder,
+.zayavka__form textarea::placeholder { color: rgba(242, 239, 233, .35); }
+.zayavka__form input:focus,
+.zayavka__form textarea:focus {
+  outline: none;
+  border-color: var(--v-accent, #f2a93b);
+  background: rgba(242, 239, 233, .09);
+}
+.zayavka__form input.is-invalid,
+.zayavka__form textarea.is-invalid { border-color: #e2574b; }
+.zayavka__form input[type="date"] { color-scheme: dark; }
+
+.zayavka__error {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  color: #f08a80;
+}
+.zayavka__submit { width: 100%; justify-content: center; border: 0; cursor: pointer; font: inherit; }
+.zayavka__note {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(242, 239, 233, .45);
+  text-align: center;
+}
+
+.zayavka__done { text-align: center; padding: 10px 0 4px; }
+.zayavka__done h3 {
+  margin: 0 0 10px;
+  font-family: "Tenor Sans", serif;
+  font-weight: 400;
+  font-size: 26px;
+}
+.zayavka__done p {
+  margin: 0 0 20px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--v-ink-soft, #a09b93);
+}
+.zayavka__tg { justify-content: center; }
+.zayavka__again {
+  display: block;
+  margin: 16px auto 0;
+  border: 0;
+  background: none;
+  color: var(--v-ink-soft, #a09b93);
+  font: inherit;
+  font-size: 13.5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.zayavka__again:hover { color: var(--v-ink, #f2efe9); }
+
+@media (max-width: 560px) {
+  .zayavka { padding: 0; align-items: flex-end; }
+  .zayavka__card {
+    width: 100%;
+    max-height: 94svh;
+    border-radius: 22px 22px 0 0;
+    padding: 32px 22px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-btn:not(.v-btn--ghost),
+  .v-btn:not(.v-btn--ghost):hover,
+  .zayavka__overlay,
+  .zayavka__card,
+  .zayavka__close { transition: none; animation: none; }
+  .v-btn:not(.v-btn--ghost):hover::before { animation: none; }
+}
